@@ -4,4 +4,3 @@ Flask-wtf==1.0.1
 SQLAlchemy==1.4.34
 WTForms==3.0.1
 requests==2.27.1
-urllib>0
