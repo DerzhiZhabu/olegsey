@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block content %}
+    <link rel="stylesheet" type="text/css" href="static/css/style.css">
+    <form class="form1" action="/search">
+    <div class="form-group" id="filter">
+        <label style="font-weight:bold" for="classSelect">Фильтры</label>
+        <input type="text" class="form-control" id="password" name="text" value={{text}}>
+        <select class="form-control" id="classSelect" name="filters">
+          <option>{{filters}}</option>
+          {%for i in ost%}
+            <option>{{i}}</option>
+          {%endfor%}
+        </select>
+        <button type="submit" class="btn btn-primary">Применить</button>
+     </div>
+    </form>
+    {%for i in lil%}
+        <div class="placet" id="blocks">
+            <img src="static/img/back.png" height="440" width="250">
+            <div class="okey" id="ge">
+                <img src={{i.img}} width="220">
+                <p>{{i.name}}</p>
+                <p style="font-weight:bold" >{{i.cost}}  ₽.</p>
+                <a href={{i.link}}>Подробнее</a>
+            </div>
+        </div>
+    {%endfor%}
+{% endblock %}

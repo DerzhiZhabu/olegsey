@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block content %}
+<link rel="stylesheet" type="text/css" href="static/css/style_main.css">
+<form action="" method="post">
+    {{ form.hidden_tag() }}
+    <div id="oleg">
+        <p>
+            {{ form.search_line(class="form-control", type="string") }}<br>
+        </p>
+        <p>{{ form.submit(type="submit", class="btn btn-primary") }}</p>
+    </div>
+</form>
+{% endblock %}

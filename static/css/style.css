@@ -1,0 +1,22 @@
+#blocks{
+float:left;
+width: 250px;
+height: 440px;
+position:relative;
+margin:0.5%;
+left:12%;
+}
+#ge{
+position:absolute;
+top:1%;
+left:1%;
+margin:1%;
+text-align: center;
+}
+#filter{
+position:absolute;
+float:left;
+margin:0.5%;
+text-align: center;
+width:11.5%;
+}

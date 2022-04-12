@@ -1,0 +1,7 @@
+flask==2.0.0
+Flask-login==0.6.0
+Flask-wtf==1.0.1
+SQLAlchemy==1.4.34
+WTForms==3.0.1
+requests==2.27.1
+urllib3==1.26.9
