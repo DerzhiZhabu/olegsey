@@ -31,11 +31,3 @@ class Ozon_items():
             s['cost'] = int(s['cost'])
             id += 1
             self.lib.append(s)
-
-
-class Wild_items():
-    def __init__(self, url):
-        request = urllib.request.urlopen(urllib.request.Request(url, headers={
-        'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9; rv:45.0) Gecko/20100101 Firefox/45.0'})).read().decode('utf-8')
-        with open('test.html', 'w', encoding='utf-8') as f:
-            f.write(request)
