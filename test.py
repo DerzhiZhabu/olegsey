@@ -39,6 +39,3 @@ class Wild_items():
         'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9; rv:45.0) Gecko/20100101 Firefox/45.0'})).read().decode('utf-8')
         with open('test.html', 'w', encoding='utf-8') as f:
             f.write(request)
-
-
-Wild_items('https://www.citilink.ru/search/?text=laptop')
