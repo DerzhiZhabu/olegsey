@@ -4,4 +4,3 @@ Flask-wtf
 SQLAlchemy
 WTForms
 requests
-urllib
