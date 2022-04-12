@@ -1,4 +1,5 @@
 import flask
+import os
 from flask import *
 from data import db_session
 from data.users import User
