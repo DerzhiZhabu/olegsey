@@ -20,7 +20,7 @@ class Ozon_items():
             s['link'] = 'https://www.ozon.ru' + i.split('href="')[1].split(' class=')[0]
             #print(s['link'])
             s['img'] = i.split('<img src="')[1].split('" srcset=')[0]
-            s['cost'] = int(''.join(i.split('class="ui-r6')[1].split(' ₽</span>')[0].split('>')[-1].split()))
+            s['cost'] = int(''.join(i.split('class="ui-s2')[1].split(' ₽</span>')[0].split('>')[-1].split()))
             s['name'] = i.split('style="color:;"')[1].split('<span>')[1].split('</span>')[0]
             if len(s['name']) > 40:
                 s['name'] = s['name'][:40] + '...'
