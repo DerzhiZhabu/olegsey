@@ -78,7 +78,6 @@ def login():
 def search():
     text = request.args.get('text').strip()
     filters = request.args.get('filters').strip()
-    print(filters)
     oz_filt = 'mem'
     ol = ['По популярности', 'По возрастанию цены', 'По убыванию цены']
     ol.remove(filters)
