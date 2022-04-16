@@ -4,3 +4,4 @@ Flask-wtf
 SQLAlchemy
 WTForms
 requests
+transliterate
