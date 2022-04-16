@@ -6,13 +6,14 @@ from forms.user import RegisterForm, LoginForm, SearchForm
 from flask_login import *
 from test import Ozon_items
 import os
-
+from transliterate import translit
 
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'yandexlyceum_secret_key'
 login_manager = LoginManager()
 login_manager.init_app(app)
+
 
 def main():
     db_session.global_init("db/blogs.db")
@@ -30,7 +31,7 @@ def load_user(user_id):
 def start():
     form = SearchForm()
     if form.validate_on_submit():
-        return redirect(url_for('search', text=form.search_line.data, filters='По популярности'))
+        return redirect(url_for('search', text=form.search_line.data, filters='По популярности', page='1'))
     return render_template('search.html', title='Введите ваш запрос', form=form)
 
 
@@ -76,8 +77,10 @@ def login():
 
 @app.route('/search', methods=['GET', 'POST'])
 def search():
-    text = request.args.get('text').strip()
+    text = '+'.join(request.args.get('text').strip().split())
+    text = translit(text, 'ru', reversed=True)
     filters = request.args.get('filters').strip()
+    page = request.args.get('page').strip()
     oz_filt = 'mem'
     ol = ['По популярности', 'По возрастанию цены', 'По убыванию цены']
     ol.remove(filters)
@@ -89,11 +92,16 @@ def search():
         sort = True
         kek = lambda s: s['cost']
         rev = False
-    k = Ozon_items(f'https://www.ozon.ru/search/?from_global=true&text={text}&sorting={oz_filt}')
+    elif filters == 'По убыванию цены':
+        oz_filt = 'price_desc'
+        kek = lambda s: s['cost']
+        rev = True
+        sort = True
+    k = Ozon_items(f'https://www.ozon.ru/search/?from_global=true&text={text}&sorting={oz_filt}&page={page}')
     s = k.lib
     if sort:
         s.sort(key=kek, reverse=rev)
-    return render_template('place.html', lil=s, title='Резултаты запроса', text=text, filters=filters, ost=ol)
+    return render_template('place.html', lil=s, title='Резултаты запроса', text=text, filters=filters, ost=ol, page=page)
 
 
 @app.route('/logout')
@@ -102,6 +110,5 @@ def logout():
     return redirect('/')
 
 
-db_session.global_init("db/blogs.db")
-port = int(os.environ.get("PORT", 8000))
-app.run(host='0.0.0.0', port=port)
+if __name__ == '__main__':
+    main()
