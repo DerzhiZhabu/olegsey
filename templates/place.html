@@ -5,6 +5,7 @@
     <div class="form-group" id="filter">
         <label style="font-weight:bold" for="classSelect">Фильтры</label>
         <input type="text" class="form-control" id="password" name="text" value={{text}}>
+        <input type="number" class="form-control" id="page" name="page" value={{page}} min="1">
         <select class="form-control" id="classSelect" name="filters">
           <option>{{filters}}</option>
           {%for i in ost%}
