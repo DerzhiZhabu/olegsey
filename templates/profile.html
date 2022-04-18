@@ -1,0 +1,6 @@
+{% extends "base.html" %}
+{% block content %}
+    <p id="namen"> Профиль </p>
+    <p id="name">{{name}}</p>
+    <p><img src="static/img/{{current_user.name}}.png"></p>
+{% endblock %}

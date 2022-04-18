@@ -51,8 +51,10 @@ def reqister():
         user = User(
             name=form.name.data,
             email=form.email.data,
-            about=form.about.data
+            about=form.about.data,
+            image=form.image.data.name
         )
+        form.image.data.save(f'static/img/{form.name.data}.png')
         user.set_password(form.password.data)
         db_sess.add(user)
         db_sess.commit()
@@ -108,6 +110,14 @@ def search():
 def logout():
     logout_user()
     return redirect('/')
+
+
+@app.route('/profile')
+def profile():
+    username = current_user.name
+    print(current_user.image)
+    print('gey')
+    return render_template('profile.html', name=username)
 
 
 if __name__ == '__main__':

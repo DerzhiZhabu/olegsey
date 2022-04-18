@@ -1,6 +1,7 @@
 from flask_wtf import FlaskForm
-from wtforms import PasswordField, StringField, TextAreaField, SubmitField, EmailField, BooleanField
-from wtforms.validators import DataRequired
+from wtforms import PasswordField, StringField, TextAreaField, SubmitField, EmailField, BooleanField, FileField
+from wtforms.validators import *
+from flask_wtf.file import *
 
 
 class RegisterForm(FlaskForm):
@@ -9,6 +10,7 @@ class RegisterForm(FlaskForm):
     password_again = PasswordField('Повторите пароль', validators=[DataRequired()])
     name = StringField('Имя пользователя', validators=[DataRequired()])
     about = TextAreaField("Немного о себе")
+    image = FileField('Ваш Аватар', validators=[FileRequired()])
     submit = SubmitField('Войти')
 
 
