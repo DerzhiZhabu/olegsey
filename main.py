@@ -7,12 +7,17 @@ from flask_login import *
 from test import Ozon_items
 import os
 from transliterate import translit
+import json
 
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'yandexlyceum_secret_key'
 login_manager = LoginManager()
 login_manager.init_app(app)
+
+
+def izb_append():
+    return 'gey'
 
 
 def main():
@@ -58,6 +63,9 @@ def reqister():
         user.set_password(form.password.data)
         db_sess.add(user)
         db_sess.commit()
+        f = open(f'static/izb/{form.name.data}.json', 'w', encoding='utf-8')
+        json.dump([], f)
+        f.close()
         return redirect('/login')
     return render_template('register.html', title='Регистрация', form=form)
 
@@ -103,7 +111,8 @@ def search():
     s = k.lib
     if sort:
         s.sort(key=kek, reverse=rev)
-    return render_template('place.html', lil=s, title='Резултаты запроса', text=text, filters=filters, ost=ol, page=page)
+    return render_template('place.html', lil=s, title='Резултаты запроса', text=text, filters=filters, ost=ol, page=page,
+                           oleg=izb_append)
 
 
 @app.route('/logout')
@@ -115,9 +124,35 @@ def logout():
 @app.route('/profile')
 def profile():
     username = current_user.name
-    print(current_user.image)
-    print('gey')
-    return render_template('profile.html', name=username)
+    f = open(f'static/izb/{username}.json', 'r', encoding='utf-8')
+    izb = json.load(f)
+    f.close()
+    return render_template('profile.html', name=username, title='Профлиь', izbr=izb)
+
+
+@app.route('/privet', methods=['get', 'post'])
+def privet():
+    name = request.args.get('name')
+    link = request.args.get('link')
+    image = request.args.get('image')
+    cost = request.args.get('cost')
+    platform = request.args.get('platform')
+    var = {'name': name,
+           'mag': platform,
+           'link': link,
+           'cost': cost,
+           'image': image}
+    print(var)
+    f = open(f'static/izb/{current_user.name}.json', 'r', encoding='utf-8')
+    data = json.load(f)
+    ol = len(data)
+    var['ol'] = ol
+    data.append(var)
+    f.close()
+    f = open(f'static/izb/{current_user.name}.json', 'w', encoding='utf-8')
+    json.dump(data, f)
+    f.close()
+    return render_template('close.html')
 
 
 if __name__ == '__main__':

@@ -12,7 +12,7 @@
             <option>{{i}}</option>
           {%endfor%}
         </select>
-        <button type="submit" class="btn btn-primary">Применить</button>
+        <button type="submit" class="btn btn-primary" onclick="to_izb()">Применить</button>
      </div>
     </form>
     {%for i in lil%}
@@ -22,6 +22,7 @@
                 <img src={{i.img}} width="220">
                 <p>{{i.name}}</p>
                 <p style="font-weight:bold" >{{i.cost}}  ₽.</p>
+                <p><a href="/privet?name={{i.name}}&link={{i.link}}&image={{i.img}}&cost={{i.cost}}&platform=ozon" target="_blank"> В избранное</a></p>
                 <a href={{i.link}}>Подробнее</a>
             </div>
         </div>
