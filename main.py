@@ -17,10 +17,6 @@ login_manager = LoginManager()
 login_manager.init_app(app)
 
 
-def izb_append():
-    return 'gey'
-
-
 def main():
     db_session.global_init("db/blogs.db")
     port = int(os.environ.get("PORT", 8000))
@@ -112,8 +108,7 @@ def search():
     s = k.lib
     if sort:
         s.sort(key=kek, reverse=rev)
-    return render_template('place.html', lil=s, title='Резултаты запроса', text=text, filters=filters, ost=ol, page=page,
-                           oleg=izb_append)
+    return render_template('place.html', lil=s, title='Резултаты запроса', text=text, filters=filters, ost=ol, page=page,)
 
 
 @app.route('/logout')
@@ -129,6 +124,7 @@ def profile():
     izb = json.load(f)
     f.close()
     return render_template('profile.html', name=username, title='Профлиь', izbr=izb)
+
 
 
 @app.route('/privet', methods=['get', 'post'])
