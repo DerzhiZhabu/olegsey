@@ -6,7 +6,7 @@ text-align: center;}
 float:left;
 text-align:center}
 TABLE {
-width: 300px; /* Ширина таблицы */
+width: 350px /* Ширина таблицы */
 border-collapse: collapse; /* Убираем двойные линии между ячейками */
 }
 TD, TH {

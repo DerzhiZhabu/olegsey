@@ -1,16 +1,16 @@
 {% extends "base.html" %}
 {% block content %}
     <link rel="stylesheet" type="text/css" href="static/css/style_prof.css">
-    <div id="info">
-    <p><img src="static/img/{{current_user.name}}.png" height="200px"></p>
+    <div id="info" onfocusout="location.reload()">
+    <p><img src="static/img/{{current_user.name}}.png" width="300px"></p>
     </div>
     <div id="izb">
         <p>Избранное</p>
         <table>
-            <tr><th>Товар</th><th>Платформа</th><th>Цена</th><th>Картинка</th><th>Ссылка</th></tr>
+            <tr><th>Товар</th><th>Платформа</th><th>Цена</th><th>Картинка</th><th>Ссылка</th><th>Удалить</th></tr>
             {%for i in izbr%}
-            <tr><th>{{i.name}}</th><th>{{i.mag}}</th><th>{{i.cost}}</th><th><img src={{i.image}} height="40px"></th><th>
-                {{i.link}}</th></tr>
+            <tr><th>{{i.name}}</th><th>{{i.mag}}</th><th>{{i.cost}}</th><th><img src={{i.image}} height="80px"></th><th>
+                <a href={{i.link}}>Подробнее</a></th><th><a href="/privet?delete=True&name={{i.name}}&link={{i.link}}&image={{i.image}}&platform=ozon&cost={{i.cost}}&ol={{i.ol}}&redir=True">Удалить</a> </th></tr>
             {%endfor%}
         </table>
     </div>

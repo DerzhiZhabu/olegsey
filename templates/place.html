@@ -22,7 +22,9 @@
                 <img src={{i.img}} width="220">
                 <p>{{i.name}}</p>
                 <p style="font-weight:bold" >{{i.cost}}  ₽.</p>
-                <p><a href="/privet?name={{i.name}}&link={{i.link}}&image={{i.img}}&cost={{i.cost}}&platform=ozon" target="_blank"> В избранное</a></p>
+                {% if current_user.is_authenticated %}
+                <p><a href="/privet?name={{i.name}}&link={{i.link}}&image={{i.img}}&cost={{i.cost}}&platform=ozon&delete=False&redir=False" target="_blank"> В избранное</a></p>
+                {% endif %}
                 <a href={{i.link}}>Подробнее</a>
             </div>
         </div>

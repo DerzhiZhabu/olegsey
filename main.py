@@ -1,4 +1,5 @@
 import flask
+import requests
 from flask import *
 from data import db_session
 from data.users import User
@@ -137,22 +138,43 @@ def privet():
     image = request.args.get('image')
     cost = request.args.get('cost')
     platform = request.args.get('platform')
+    delete = request.args.get('delete')
+    redir = request.args.get('redir')
+    if delete == 'True':
+        ol = int(request.args.get('ol'))
     var = {'name': name,
            'mag': platform,
            'link': link,
            'cost': cost,
            'image': image}
-    print(var)
     f = open(f'static/izb/{current_user.name}.json', 'r', encoding='utf-8')
     data = json.load(f)
-    ol = len(data)
-    var['ol'] = ol
-    data.append(var)
     f.close()
+    if delete == 'False':
+        if len(data) == 0:
+            ol = 0
+        else:
+            ol = data[-1]['ol'] + 1
+    var['ol'] = ol
+    if delete == 'False':
+        k = 0
+        for i in data:
+            if i['link'] == var['link']:
+                k = 1
+                break
+        if k == 0:
+            data.append(var)
+    else:
+        for i in data:
+            if i['ol'] == var['ol']:
+                data.remove(i)
     f = open(f'static/izb/{current_user.name}.json', 'w', encoding='utf-8')
     json.dump(data, f)
     f.close()
-    return render_template('close.html')
+    if redir == 'False':
+        return render_template('close.html')
+    else:
+        return redirect('/profile')
 
 
 if __name__ == '__main__':
